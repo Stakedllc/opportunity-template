@@ -56,6 +56,7 @@ contract MyOpportunity is IOpportunity, Initializable {
 
   /// @notice  Initialize Opportunity
   ///
+  /// @param   storage_contract - address of the storage contract
   /// @param   principalToken - address of the principal token
   function initialize(address storage_contract, address principalToken) public initializer {
     rayStorage = IStorage(storage_contract);
