@@ -15,7 +15,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   bytes32 internal constant ADMIN_CONTRACT = keccak256("AdminContract");
   bytes32 internal constant OPPORTUNITY_MANAGER_CONTRACT = keccak256("RAYv3Contract");
   
-  IStorage public _storage;
+  IStorage public rayStorage;
 
     /*************** MODIFIER DECLARATIONS **************/
 
@@ -25,7 +25,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   /// @dev     To be removed once fallbacks are
   modifier onlyGovernance() {
       require(
-          msg.sender == _storage.getGovernanceWallet(),
+          msg.sender == rayStorage.getGovernanceWallet(),
           "#MyOpportunityImpl onlyGovernance Modifier: Only Governance can call this"
       );
 
@@ -36,7 +36,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   /// @notice  Checks the caller is our Admin contract
   modifier onlyAdmin() {
       require(
-          msg.sender == _storage.getContractAddress(ADMIN_CONTRACT),
+          msg.sender == rayStorage.getContractAddress(ADMIN_CONTRACT),
           "#MyOpportunityImpl onlyAdmin Modifier: Only Admin can call this"
       );
 
@@ -47,7 +47,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   /// @notice  Checks the caller is our OpportunityManager contract
   modifier onlyOpportunityManager() {
       require(
-          msg.sender == _storage.getContractAddress(OPPORTUNITY_MANAGER_CONTRACT),
+          msg.sender == rayStorage.getContractAddress(OPPORTUNITY_MANAGER_CONTRACT),
           "#MyOpportunityImpl onlyOpportunityManager Modifier: Only OpportunityManager can call this"
       );
 
@@ -58,7 +58,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   ///
   /// @param   principalToken - address of the principal token
   function initialize(address storage_contract, address principalToken) public initializer {
-    _storage = IStorage(storage_contract);
+    rayStorage = IStorage(storage_contract);
   }
 
   /// @notice  Fallback function to receive Ether
