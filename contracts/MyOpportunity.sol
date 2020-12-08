@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity 0.5.11;
+pragma solidity 0.5.17;
 
 import "./interfaces/IOpportunity.sol";
 import "./libraries/Initializable.sol";

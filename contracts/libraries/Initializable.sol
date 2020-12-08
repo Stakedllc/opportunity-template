@@ -1,4 +1,4 @@
-pragma solidity 0.5.11;
+pragma solidity 0.5.17;
 
 /// npm package/version - @openzeppelin/upgrades: 2.8.0
 
