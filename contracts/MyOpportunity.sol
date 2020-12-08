@@ -26,7 +26,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   modifier onlyGovernance() {
       require(
           msg.sender == rayStorage.getGovernanceWallet(),
-          "#MyOpportunityImpl onlyGovernance Modifier: Only Governance can call this"
+          "#MyOpportunity onlyGovernance Modifier: Only Governance can call this"
       );
 
       _;
@@ -37,7 +37,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   modifier onlyAdmin() {
       require(
           msg.sender == rayStorage.getContractAddress(ADMIN_CONTRACT),
-          "#MyOpportunityImpl onlyAdmin Modifier: Only Admin can call this"
+          "#MyOpportunity onlyAdmin Modifier: Only Admin can call this"
       );
 
       _;
@@ -48,7 +48,7 @@ contract MyOpportunity is IOpportunity, Initializable {
   modifier onlyOpportunityManager() {
       require(
           msg.sender == rayStorage.getContractAddress(OPPORTUNITY_MANAGER_CONTRACT),
-          "#MyOpportunityImpl onlyOpportunityManager Modifier: Only OpportunityManager can call this"
+          "#MyOpportunity onlyOpportunityManager Modifier: Only OpportunityManager can call this"
       );
 
       _;
