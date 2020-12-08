@@ -17,20 +17,21 @@ contract MyOpportunity is IOpportunity, Initializable {
   
   IStorage public rayStorage;
 
+  // map principal tokens to contracts to call
+  //  -> not in storage since this unique to MyOpportunity
+  mapping(address => address) public markets;
+
+  // NOTE: Mapping can be changed to a struct or any other data structure needed
+  // Ex:
+  // 
+  // struct MyOpportunityMarket {
+  //   address otherAddress;
+  //   uint32 usefulValue;
+  //   int8 decimals;
+  // }
+  // mapping(address => MyOpportunityMarket) public markets;
+
     /*************** MODIFIER DECLARATIONS **************/
-
-
-  /// @notice  Checks the caller is our Governance Wallet
-  ///
-  /// @dev     To be removed once fallbacks are
-  modifier onlyGovernance() {
-      require(
-          msg.sender == rayStorage.getGovernanceWallet(),
-          "#MyOpportunity onlyGovernance Modifier: Only Governance can call this"
-      );
-
-      _;
-  }
 
 
   /// @notice  Checks the caller is our Admin contract
@@ -57,9 +58,16 @@ contract MyOpportunity is IOpportunity, Initializable {
   /// @notice  Initialize Opportunity
   ///
   /// @param   storage_contract - address of the storage contract
-  /// @param   principalToken - address of the principal token
-  function initialize(address storage_contract, address principalToken) public initializer {
+  /// @param   principalToken - address array of the principal token
+  /// @param   otherToken - address array of the other token
+  function initialize(
+    address storage_contract, 
+    address[] principalToken, 
+    address[] otherToken
+    // <add any parameters neeeded>
+  ) public initializer {
     rayStorage = IStorage(storage_contract);
+    _addPrincipalTokens(principalToken, otherToken);
   }
 
   /// @notice  Fallback function to receive Ether
@@ -95,5 +103,50 @@ contract MyOpportunity is IOpportunity, Initializable {
   /// @param   token - address of the token to get the balance of
   function getBalance(address token) external returns (uint){
     
+  }
+
+
+  /** ----------------- ONLY ADMIN MUTATORS ----------------- **/
+  /// @notice  Add support for a coin
+  ///
+  /// @dev     This is configured in-contract since it's not common across Opportunities
+  ///
+  /// @param   principalTokens - The coin contract addresses
+  /// @param   otherContracts - The other contracts that map to each coin
+  function addPrincipalTokens(
+    address[] memory principalTokens,
+    address[] memory otherContracts
+    // <add any parameters neeeded>
+  )
+    public // not using external b/c use memory to pass in array
+    onlyAdmin
+  {
+
+    _addPrincipalTokens(principalTokens, otherContracts);
+
+  }
+
+  /*************** INTERNAL FUNCTIONS **************/
+
+  /// @notice  Used to add coins support to this Opportunities configuration
+  ///
+  /// @dev     Internal version so we can call from the constructor and Admin Contract
+  ///
+  /// @param   principalTokens - The coin contract addresses
+  /// @param   otherContracts - The other contracts that map to each coin
+  function _addPrincipalTokens(
+    address[] memory principalTokens,
+    address[] memory otherContracts
+    // <add any parameters neeeded>
+  )
+    internal
+  {
+
+    for (uint i = 0; i < principalTokens.length; i++) {
+
+      markets[principalTokens[i]] = otherContracts[i];
+
+    }
+
   }
 }
