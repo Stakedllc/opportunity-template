@@ -62,8 +62,8 @@ contract MyOpportunity is IOpportunity, Initializable {
   /// @param   otherToken - address array of the other token
   function initialize(
     address storage_contract, 
-    address[] principalToken, 
-    address[] otherToken
+    address[] memory principalToken,  // Optional
+    address[] memory otherToken       // Optional
     // <add any parameters neeeded>
   ) public initializer {
     rayStorage = IStorage(storage_contract);
