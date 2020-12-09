@@ -13,10 +13,10 @@ npm i
 
 #### Scripts (see: package.json)
 ```bash
-yarn accounts
-yarn compile
-yarn test
-yarn node
-yarn scripts:sample
-yarn help
+npm run accounts
+npm run compile
+npm run test
+npm run node
+npm run scripts:sample
+npm run help
 ```
