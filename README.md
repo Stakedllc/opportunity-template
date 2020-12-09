@@ -11,10 +11,10 @@ cd opportunity-template
 npm i
 ```
 
-#### Using hardhat
-  - npx hardhat accounts
-  - npx hardhat compile
-  - npx hardhat test
-  - npx hardhat node
-  - node scripts/sample-script.js
-  - npx hardhat help
+#### Scripts (see: package.json)
+yarn accounts
+yarn compile
+yarn test
+yarn node
+yarn scripts:sample
+yarn help
