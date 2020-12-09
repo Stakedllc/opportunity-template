@@ -12,9 +12,9 @@ npm i
 ```
 
 #### Scripts (see: package.json)
-yarn accounts
-yarn compile
-yarn test
-yarn node
-yarn scripts:sample
-yarn help
+ - yarn accounts
+ - yarn compile
+ - yarn test
+ - yarn node
+ - yarn scripts:sample
+ - yarn help
