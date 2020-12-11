@@ -2,7 +2,7 @@
 ## Installation
 ```bash
 # Git Clone
-git clone git@github.com:Stakedllc/opportunity-template.git
+git clone https://github.com/Stakedllc/opportunity-template.git
 
 # Change Directory
 cd opportunity-template
